@@ -1,0 +1,4 @@
+{
+    global: pse_module;
+    local: *;
+};

@@ -54,7 +54,14 @@ private:
             void* outMsg)
             {
                 ThrowStatusWrapper st(status);
-                self->execute(&st, context, inMsg, outMsg);
+                try
+                {
+                    self->execute(&st, context, inMsg, outMsg);
+                }
+                catch(...)
+                {
+                    ThrowStatusWrapper::catchException(&st);
+                }
             };
     } *pVT = new PSEFuncVT();
  

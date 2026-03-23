@@ -205,7 +205,7 @@ char *PSEngine::getModuleInfo(PSModule *mod) {
     char *result = str_snprintf("module: \"%s\"; version: \"%s\"; " \
         "loaded: %s (%s ago); file time: %s; engine module reload count: %d",
         PSE_MODULE_FILENAME, 
-        mod->version,
+        mod->version.c_str(),
         loaded_str,
         elapsed_str,
         file_time_str,

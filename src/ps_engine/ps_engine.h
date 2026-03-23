@@ -60,8 +60,16 @@ private:
             IMetadataBuilder* outBuilder)
             {   
                 ThrowStatusWrapper st(status);
-                return self->makeFunction(&st, context, metadata, 
-                    inBuilder, outBuilder);
+                try
+                {
+                    return self->makeFunction(&st, context, metadata, 
+                        inBuilder, outBuilder);
+                }
+                catch(...)
+                {
+                    ThrowStatusWrapper::catchException(&st);
+                    return static_cast<IExternalFunction*>(0);
+                }  
             };
         DECLARE_VT_HANDLER(IExternalProcedure*, makeProcedure, 
             PSEngine*, IStatus*, 
